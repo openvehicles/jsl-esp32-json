@@ -24,6 +24,7 @@
 
 
 #include <iostream>
+#include <stdlib.h>     /* atol */
 
 #define LOG_LOCAL_LEVEL ESP_LOG_NONE
 // #define LOG_LOCAL_LEVEL ESP_LOG_VERBOSE
@@ -540,7 +541,8 @@ bool jsl_parser::unescape(std::string& _str)
 
 		char buf[5] = {};
 		m_src.get(buf,4);
-		std::string::value_type ch = std::strtol(buf,nullptr,16);
+
+		std::string::value_type ch = atol(buf); //std::strtol(buf,nullptr,16);
 		utf8_str(ch,_str);
 		break;
 	}
@@ -602,4 +604,3 @@ bool jsl_parser::eat_space()
 	}
 	return false; // not EOF
 }
-
